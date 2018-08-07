@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://xmlns.jcp.org/jsf/html"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+              xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:dialog header="Saida" widgetVar="dlgsaida" width="700" height="500" closable="true" resizable="true" showEffect="puff">
+        <h:form>
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+
+            <p:wizard flowListener="#{saidaWizard.onFlowProcess}">
+                <p:tab id="first" title="Detalhes da Saída">
+
+                    <p:panel header="Detalhes Gerais">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Data do lançamento: *" />
+                            <p:inputText value="#{saidaWizard.saida.dataSaida}" required="true" label="Data"/>
+                            
+                            <p:selectOneMenu value="#{compraWizard.compra.fornecedor}" required="true" label="Data">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{compraWizard.fornecedores}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:panel header="Relação de Técnicos">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:panel header="Relação de Itens">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmation">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+
+
+                                <h:outputText />
+                                <h:outputText />
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{saidaWizard.save}" update="growl" process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+    </p:dialog>
+
+</ui:component>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:dialog header="Compra" widgetVar="dlgdevolucao" width="700" height="500" closable="true" resizable="true" showEffect="puff">
+
+        <h:form>
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+
+            <p:wizard flowListener="#{deWizard.onFlowProcess}">
+                <p:tab id="first" title="Dados da Devolução">
+                    <p:panel header="Detalhes Gerais">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Data do lançamento: *" />
+                            <p:inputText value="#{compraWizard.compra.dataCompra}" required="true" label="Data"/>
+
+                            <h:outputText value="Fornecedor: *" />
+                            <p:selectOneMenu value="#{compraWizard.compra.fornecedor}" required="true" label="Data">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{compraWizard.fornecedores}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Motivo: *" />
+                            <p:selectOneMenu value="#{compraWizard.compra.motivo}" required="true" label="Data">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{compraWizard.motivos}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="Relação de Itens">
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:form>
+                                <h:outputText value="Produto: *" />
+                                <p:selectOneMenu value="#{compraProdutoTable.item}" label="Data">
+                                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                    <f:selectItems value="#{compraProdutoTable.produtos}"/>
+                                </p:selectOneMenu>
+                                <h:outputText value="Quantidade: *" />
+                                <p:inputText value="#{compraProdutoTable.quantidade}" label="Data"/>
+                                <p:commandButton actionListener="#{compraProdutoTable.addItem}"/>
+                            </h:form>
+                            <p:dataTable var="itens" value="#{compraProdutoTable.itens}">
+                                <p:column headerText="Produto">
+                                    <h:outputText value="#{itens.produto}" />
+                                </p:column>
+
+                                <p:column headerText="Quantidade">
+                                    <h:outputText value="#{itens.quantidade}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmação">
+                    <p:panel header="Dados inseridos">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Firstname: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.firstname}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Lastname: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.lastname}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Age: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.age}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.street}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Postal: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.postalCode}" styleClass="outputLabel"/>
+
+                                <h:outputText value="City: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.city}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.email}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Phone " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.phone}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Info: " />
+                                <h:outputText value="#{cadastroMaterialWizard.compra.info}" styleClass="outputLabel"/>
+
+                                <h:outputText />
+                                <h:outputText />
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{compraWizard.save}" update="growl" process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

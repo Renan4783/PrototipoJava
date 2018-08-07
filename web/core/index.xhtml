@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:view contentType="text/html">
+
+        <h:head>
+            <f:facet name="main">
+                <meta content='text/xhtml; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>DataFibra Estoque</title>
+            </f:facet>
+            <h:outputScript library="jquery" name="../resources/jquery/jquery-ui.js"/>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" style="overflow-x: hidden !important;">
+                    <ui:include src="headerIndex.xhtml"/> 
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="20%" header="Menu" resizable="true" collapsible="true" >
+                    <ui:include src="sideIndex.xhtml"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" resizable="true" >
+                    <ui:include src="listIndex.xhtml"/>
+                    <ui:include src="lineIndex.xhtml"/>
+                    <ui:include src="pieIndex.xhtml"/>
+                </p:layoutUnit>
+               
+                <ui:include src="mov/dlgCompra.xhtml"/>
+                
+                <ui:include src="mov/dlgDevolucao.xhtml"/>
+
+                <ui:include src="mov/dlgSaida.xhtml"/>
+
+                <ui:include src="func/dlgFunc.xhtml"/>
+                       
+                <ui:include src="func/dlgCadFunc.xhtml" />
+                
+                <ui:include src="func/dlgAltFunc.xhtml"/>
+                
+                <ui:include src="func/dlgDelFunc.xhtml"/>
+                
+                <ui:include src="prod/dlgProd.xhtml"/>
+                
+                <ui:include src="prod/dlgCadProd.xhtml"/>
+                
+                <ui:include src="prod/dlgAltProd.xhtml"/>
+                
+                <ui:include src="prod/dlgDelProd.xhtml"/>
+                
+                <ui:include src="cli/dlgCli.xhtml"/>
+                
+                <ui:include src="cli/dlgCadCli.xhtml"/>
+                
+                <ui:include src="cli/dlgAltCli.xhtml"/>
+                
+                <ui:include src="cli/dlgDelCli.xhtml"/>
+                
+                <ui:include src="forc/dlgForc.xhtml"/>
+                
+                <ui:include src="forc/dlgCadForc.xhtml"/>
+                
+                <ui:include src="forc/dlgAltForc.xhtml"/>
+                
+                <ui:include src="forc/dlgDelForc.xhtml"/>
+                
+                <ui:include src="mot/dlgMot.xhtml"/>
+                
+                <ui:include src="mot/dlgCadMot.xhtml"/>
+                
+                <ui:include src="mot/dlgAltMot.xhtml"/>
+                
+                <ui:include src="mot/dlgDelMot.xhtml"/>
+                
+                <ui:include src="tec/dlgTec.xhtml"/>
+                
+                <ui:include src="tec/dlgCadTec.xhtml"/>
+                
+                <ui:include src="tec/dlgAltTec.xhtml"/>
+                
+                <ui:include src="tec/dlgDelTec.xhtml"/>
+                
+            </p:layout>
+
+        </h:body>
+    </f:view>
+</html>

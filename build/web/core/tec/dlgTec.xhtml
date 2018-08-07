@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+    <p:dialog header="Cadastro de Tecnicos" widgetVar="dlglisttec" width="50%" height="100%" closable="true" resizable="false" showEffect="puff" onHide="PF('tecTable').clearFilters()">
+
+        <h:form>
+
+            <p:dataTable id="tableTecnico" var="tec" value="#{tecnicoTable.tecnicoList}" widgetVar="tecTable"
+                         rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"
+                         selection="#{tecnicoTable.selectedTec}" rowKey="#{tec.nome}"
+                         emptyMessage="Nenhum dado correspondente" filteredValue="#{tecnicoTable.filteredTecList}">
+
+                <f:facet name="header">
+
+                    <p:menubar>
+                        <p:menuitem value="Novo" url="#" onclick="PF('dlgcadtec').show()" icon="ui-icon-plusthick" />
+                        <p:menuitem value="Alterar " url="#" onclick="PF('dlgalttec').show()" icon="ui-icon-pencil" />
+                        <p:menuitem value="Deletar" url="#" onclick="PF('dlgdeltec').show()" icon="ui-icon-closethick" />
+                        <f:facet name="options">
+                            <p:outputPanel>
+                                <p:inputText id="globalFilter" onkeyup="PF('tecTable').filter()" style="width:150px; margin-right:10px" placeholder="Pesquisar"/>
+                                <p:commandButton value="Atualizar" actionListener="#{tecnicoTable.refresh()}" oncomplete="PF('tecTable').filter()"/>
+                            </p:outputPanel>
+                        </f:facet>
+                    </p:menubar>
+                </f:facet>
+
+                <p:column headerText="Código" filterBy="#{tec.codTecnico}" sortBy="#{tec.codTecnico}" filterMatchMode="contains">
+                    <h:outputText value="#{tec.codTecnico}" />
+                </p:column>
+
+                <p:column headerText="Nome" filterBy="#{tec.nome}" sortBy="#{tec.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{tec.nome}" />
+                </p:column>
+
+                <p:column headerText="Telefone 1" filterBy="#{tec.telefone1}" sortBy="#{tec.telefone1}" filterMatchMode="contains">
+                    <h:outputText value="#{tec.telefone1}" />
+                </p:column>
+
+                <p:column headerText="Telefone 2" filterBy="#{tec.telefone2}" sortBy="#{tec.telefone2}" filterMatchMode="contains">
+                    <h:outputText value="#{tec.telefone2}" />
+                </p:column>
+                
+            </p:dataTable>
+
+            <p:poll interval="30" immediate="true" listener="#{tecnicoTable.refresh()}" update="tableTecnico"/>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>

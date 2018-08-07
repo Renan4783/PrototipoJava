@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+    <p:dialog header="Cadastro de Motivo" widgetVar="dlglistmot" width="50%" height="100%" closable="true" resizable="false" showEffect="puff" onHide="PF('motTable').clearFilters()">
+        
+        <h:form>
+
+            <p:dataTable id="tableMotivo" var="mot" value="#{motivoTable.motivoList}" widgetVar="motTable"
+                             rows="10" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{motivoTable.selectedMot}" rowKey="#{mot.nome}"
+                             emptyMessage="Nenhum dado correspondente" filteredValue="#{motivoTable.filteredMotList}">
+
+                    <f:facet name="header">
+
+                        <p:menubar>
+                            <p:menuitem value="Novo" url="#" onclick="PF('dlgcadmot').show()" icon="ui-icon-plusthick" />
+                            <p:menuitem value="Alterar " url="#" onclick="PF('dlgaltmot').show()" icon="ui-icon-pencil" />
+                            <p:menuitem value="Deletar" url="#" onclick="PF('dlgdelmot').show()" icon="ui-icon-closethick" />
+                            <f:facet name="options">
+                                <p:outputPanel>
+                                    <p:inputText id="globalFilter" onkeyup="PF('motTable').filter()" style="width:150px; margin-right:10px" placeholder="Pesquisar"/>
+                                    <p:commandButton value="Atualizar" actionListener="#{motivoTable.refresh()}" oncomplete="PF('motTable').filter()"/>
+                                </p:outputPanel>
+                            </f:facet>
+                        </p:menubar>
+                    </f:facet>
+
+                <p:column headerText="Código" filterBy="#{mot.codMotivo}" sortBy="#{mot.codMotivo}" filterMatchMode="contains">
+                    <h:outputText value="#{mot.codMotivo}" />
+                    </p:column>
+
+                <p:column headerText="Nome" filterBy="#{mot.nome}" sortBy="#{mot.nome}" filterMatchMode="contains">
+                    <h:outputText value="#{mot.nome}" />
+                    </p:column>
+
+                </p:dataTable>
+            
+            <p:poll interval="30" immediate="true" listener="#{motivoTable.refresh()}" update="tableMotivo"/>
+            
+        </h:form>
+        
+    </p:dialog>
+
+</ui:composition>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:accordionPanel>
+        <p:tab title="Cadastro">
+            <p:commandButton value="Produto" onclick="PF('dlglistprod').show()" style="width: 180px; height: 40px;"  />
+            <p:commandButton value="Cliente" onclick="PF('dlglistcli').show()" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Técnico" onclick="PF('dlglisttec').show()" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Fornecedor" onclick="PF('dlglistforc').show()" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Motivo" onclick="PF('dlglistmot').show()" style="width: 180px; height: 40px;"/>
+        </p:tab>
+        <p:separator/>
+        <p:tab title="Movimentação">
+            <p:commandButton value="Compra" onclick="PF('dlgcompra').show();" style="width: 180px; height: 40px;" />
+            <p:commandButton value="Devolução" onclick="PF('dlgdevolucao').show();" style="width: 180px; height: 40px;" />    
+            <p:commandButton value="Saida" onclick="PF('dlgsaida').show();" style="width: 180px; height: 40px;" />
+        </p:tab>
+        <p:separator/>
+        <p:tab title="Relatórios">
+            <p:commandButton value="Estoque geral" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Produtos" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Clientes" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Técnicos" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Fornecedores" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Compras" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Devoluções" style="width: 180px; height: 40px;"/>
+            <p:commandButton value="Saidas" style="width: 180px; height: 40px;"/>
+        </p:tab>
+    </p:accordionPanel>
+
+</ui:component>

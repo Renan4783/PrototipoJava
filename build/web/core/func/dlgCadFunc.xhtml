@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:dialog header="Novo Funcionario" widgetVar="dlgcadfunc" width="50%" height="100%" closable="true" resizable="false" showEffect="puff">
+
+        <h:form id="cadFunc">
+            
+            <p:growl id="growl" sticky="true" showDetail="true" life="800"/>
+            
+            <p:wizard flowListener="#{funcionarioWizard.onFlowProcess}" widgetVar="wizCadFunc">
+                <p:tab id="first" title="Dados do Cadastro">
+                    <p:panel header="Dados do Funcionario">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Login: *" />
+                            <p:inputText value="#{funcionarioWizard.funcionario.login}" required="true" label="Login"/>
+
+                            <h:outputText value="Senha: *" />
+                            <p:password id="senha1" value="#{funcionarioWizard.funcionario.senha}" required="true" match="senha2" label="Senha1"/>
+
+                            <h:outputText value="Confirmar Senha: *" />
+                            <p:password id="senha2" value="#{funcionarioWizard.funcionario.senha}" required="true" label="Senha2"/>
+
+                            <h:outputText value="Admin: " />
+                            <p:selectBooleanCheckbox value="#{funcionarioWizard.funcionario.administrador}" label="Admin"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+                <br/>
+
+                <p:tab id="confirm" title="Confirmação">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Login: " />
+                                <h:outputText value="#{funcionarioWizard.funcionario.login}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Admin: " />
+                                <h:outputText value="#{funcionarioWizard.funcionario.administrador}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{funcionarioWizard.save}" update="growl" process="@this" onclick="PF('dlgcadfunc').hide()" oncomplete="PF('wizCadFunc').loadStep('first', false)">
+                            <p:resetInput target=":cadFunc"/>
+                        </p:commandButton>
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+    </p:dialog>
+
+
+</ui:composition>

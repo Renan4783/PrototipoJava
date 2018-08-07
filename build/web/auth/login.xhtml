@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="login">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>DataFibra Estoque</title>
+            </f:facet>
+            <script type="text/javascript" src="../resources/js/Dialog.js"></script>
+            <script type="text/javascript" src="../resources/js/loginrequest.js"></script>
+        </h:head>
+
+        <h:body>
+
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="center" style="text-align: center; padding-top: 10%; position: absolute;">
+
+                    <h:graphicImage value="resources/img/Logo.png" height="65%"/>
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south">
+                    <p:panelGrid columns="2" style="width: 100%; text-align: center;">
+                        <p:column rowspan="20">Gestão de Estoque</p:column>
+                        <p:column rowspan="20">Protótipo Versão: 20102017</p:column>
+                    </p:panelGrid>
+                </p:layoutUnit>
+                
+                <p:dialog header="Autenticação" widgetVar="dlglogin" height="150" width="370" closable="false" resizable="false" draggable="true" showEffect="puff" >
+                    <h:form>
+                        <p:growl id="growl" sticky="true" showDetail="true" life="800"/>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="Login" value="Usuario:" />
+                            <p:inputText id="Login" value="#{funcionarioLogin.login}" required="true" requiredMessage="Login inválido" label="Login" />
+
+                            <h:outputLabel for="Senha" value="Senha:" />
+                            <p:password id="Senha" value="#{funcionarioLogin.senha}" required="true" requiredMessage="Senha inválida" label="Senha" />
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Entrar" update="growl" actionListener="#{funcionarioLogin.startSession}"
+                                                 oncomplete="handleLoginRequest(xhr, status, args)" class="buttonslogin">
+                                    <f:param name="user" value="#{funcionarioLogin.login}"/>
+                                </p:commandButton>
+                            </f:facet>  
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

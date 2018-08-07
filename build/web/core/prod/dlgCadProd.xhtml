@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:dialog header="Novo Produto" widgetVar="dlgcadprod" width="50%" height="100%" closable="true" resizable="false" showEffect="puff">
+
+        <h:form id="cadProd">
+            
+            <p:growl id="growl" sticky="true" showDetail="true" life="800"/>
+            
+            <p:wizard flowListener="#{produtoWizard.onFlowProcess}" widgetVar="wizCadProd">
+                <p:tab id="first" title="Dados do Cadastro">
+                    <p:panel header="Dados do Produto">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                            <h:outputText value="Nome: *" />
+                            <p:inputText value="#{produtoWizard.produto.nome}" required="true" label="Nome"/>
+
+                            <h:outputText value="Descrição: *" />
+                            <p:inputText value="#{produtoWizard.produto.descricao}" required="true" label="Endereco"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+                <br/>
+
+                <p:tab id="confirm" title="Confirmação">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Nome: " />
+                                <h:outputText value="#{produtoWizard.produto.nome}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                            
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Descrição: " />
+                                <h:outputText value="#{produtoWizard.produto.descricao}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                            
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{produtoWizard.save}" update="growl" process="@this" onclick="PF('dlgcadprod').hide()" oncomplete="PF('wizCadProd').loadStep('first', false)">
+                            <p:resetInput target=":cadProd"/>
+                        </p:commandButton>
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+    </p:dialog>
+
+
+</ui:composition>

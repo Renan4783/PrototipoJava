@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+
+    <p:dialog header="Cadastro de Funcionarios" widgetVar="dlglistfunc" width="50%" height="100%" closable="true" resizable="false" showEffect="puff" onHide="PF('funcTable').clearFilters()">
+        
+        <h:form>
+
+                <p:dataTable id="tableFuncionario" var="func" value="#{funcionarioTable.funcionarioList}" widgetVar="funcTable"
+                             rows="10" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selection="#{funcionarioTable.selectedFunc}" rowKey="#{func.login}"
+                             emptyMessage="Nenhum dado correspondente" filteredValue="#{funcionarioTable.filteredFuncList}">
+
+                    <f:facet name="header">
+
+                        <p:menubar>
+                            <p:menuitem value="Novo" url="#" update=":cadFunc" onclick="PF('dlgcadfunc').show()" icon="ui-icon-plusthick"/>
+                            <p:menuitem value="Alterar " url="#" onclick="PF('dlgaltfunc').show()" icon="ui-icon-pencil" />
+                            <p:menuitem value="Deletar" url="#" onclick="PF('dlgdelfunc').show()" icon="ui-icon-closethick" />
+                            <f:facet name="options">
+                                <p:outputPanel>
+                                    <p:inputText id="globalFilter" onkeyup="PF('funcTable').filter()" style="width:150px; margin-right:10px" placeholder="Pesquisar"/>
+                                    <p:commandButton value="Atualizar" actionListener="#{funcionarioTable.refresh()}" icon="ui-icon-refresh" oncomplete="PF('funcTable').filter()"/>
+                                </p:outputPanel>
+                            </f:facet>
+                        </p:menubar>
+                    </f:facet>
+
+                    <p:column headerText="Código" filterBy="#{func.codFuncionario}" sortBy="#{func.codFuncionario}" filterMatchMode="contains">
+                        <h:outputText value="#{func.codFuncionario}" />
+                    </p:column>
+
+                    <p:column headerText="Login" filterBy="#{func.login}" sortBy="#{func.login}" filterMatchMode="contains">
+                        <h:outputText value="#{func.login}" />
+                    </p:column>
+                    
+                    <p:column headerText="Senha" filterBy="#{func.senha}" sortBy="#{func.senha}" filterMatchMode="contains">
+                        <h:outputText value="#{func.senha}" />
+                    </p:column>
+
+                    <p:column headerText="Admin" filterBy="#{func.administrador}" sortBy="#{func.administrador}" filterMatchMode="contains">
+                        <h:outputText value="#{func.administrador}" />
+                    </p:column>
+
+                </p:dataTable>
+            
+            <p:poll interval="30" immediate="true" listener="#{funcionarioTable.refresh()}" update="tableFuncionario"/>
+            
+        </h:form>
+        
+    </p:dialog>
+
+</ui:composition>

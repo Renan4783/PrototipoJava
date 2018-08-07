@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <p:dialog header="Alterar Motivo" widgetVar="dlgaltmot" width="50%" height="100%" closable="true" resizable="false" showEffect="puff" onHide="PF('wizAltMot').loadStep('first', false)">
+
+        <h:form>
+
+            <p:growl id="growl" sticky="true" showDetail="true" life="800"/>
+
+            <p:wizard flowListener="#{motivoWizard.onFlowProcess}" widgetVar="wizAltMot">
+
+                <p:tab id="first" title="Código">
+                    <p:panel header="Digite o código do registro">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Codigo: *" />
+                            <p:inputText value="#{motivoWizard.motivo.codMotivo}" required="true" label="codMotivo"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="second" title="Dados do Cadastro">
+                    <p:panel header="Insira os novos dados do cadastro">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+
+                            <h:outputText value="Nome: *" />
+                            <p:inputText value="#{motivoWizard.motivo.nome}" required="true" label="Nome"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmação">
+                    <p:panel header="Confirmação">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Nome: " />
+                                <h:outputText value="#{motivoWizard.motivo.nome}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{motivoWizard.alter}" update="growl" process="@this" onclick="PF('dlgaltmot').hide()" oncomplete="PF('wizAltMot').loadStep('first', false)"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>

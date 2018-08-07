@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Prototipo?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="show_sql">true</property>
+    <mapping class="bean.Cidade" />
+    <mapping class="bean.Cliente" />
+    <mapping class="bean.Compra" />
+    <mapping class="bean.CompraProduto" />
+    <mapping class="bean.Devolucao" />
+    <mapping class="bean.DevolucaoProduto" />
+    <mapping class="bean.Fornecedor" />
+    <mapping class="bean.Funcionario" />
+    <mapping class="bean.Motivo" />
+    <mapping class="bean.Produto" />
+    <mapping class="bean.Saida" />
+    <mapping class="bean.SaidaProduto" />
+    <mapping class="bean.Tecnico" />
+  </session-factory>
+</hibernate-configuration>
